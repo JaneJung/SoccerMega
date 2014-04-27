@@ -6,10 +6,10 @@
 #include <stdio.h>
 #include <string.h>
 
-static char flag;
-static char buf[100];
 static int uart_putchar(char c, FILE *stream);
 static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
+
+enum STATE {ready, start};
 
 static int uart_putchar(char c, FILE *stream) {
 	if (c == '\n') {
@@ -24,11 +24,17 @@ unsigned char GetChar0 ()
 {
 	char c;
 	while (!(UCSR0A & 0x80)) ;
-	//buf[cnt++] = UDR0;
 	c = UDR0;
+
 	while (!(UCSR1A & 0x20)) ;
 	UDR1 = c;
+	
+	while (!(UCSR1A & 0x20)) ;
+	UDR1 = '\n';
 
+	while (!(UCSR1A & 0x20)) ;
+	UDR1 = '\r';
+	
 	return c;
 }
 
@@ -54,8 +60,7 @@ void atcommand (char *s)
 int main(void) {
 	
 	unsigned short int ubrr;
-	char data[100];
-	int i;
+	char c;
 
 	ubrr = ((F_CPU/(16L*BAUD)) - 1);
 
@@ -82,17 +87,19 @@ int main(void) {
 	//atcommand("at+btcancel\r ");
 	//atcommand("at+btinq?\r ");
 	
-	//atcommand("at+btsec,0,0\r ");
-	//atcommand("ath\r ");
-	//atcommand("atd28987BB2F4F1\r ");
-	atcommand("atd201301300278\r ");
+	atcommand("atd201301300278\r "); // 17¹ø ARM BOARD
 	atcommand("at+btinfo?\r ");
-	atcommand("hello bt\r ");
 	//atcommand("at+mlist?\r ");
-	printf("\n@@@@@@@@@@@@@@\n");
 	
-	for(i = 0; i < 100; i++) {
-		GetChar0();
+	atcommand("GO\r ");
+
+	while(1) {
+		c = GetChar0();
+		if ( (c >> 4) == 6 && (c&0x0F) <= 6 ) {
+			// TODO : control motor
+			atcommand("5\r ");
+		} else {
+			atcommand("0\r ");
+		}
 	}
-	
 }
