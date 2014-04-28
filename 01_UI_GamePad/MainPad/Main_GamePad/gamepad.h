@@ -21,30 +21,27 @@ public:
 
 private slots:
 
-
-
-
-  //  void on_bt_UP_pressed();
+    void on_bt_UP_clicked();
 
     void on_bt_UP_LEFT_pressed();
 
     void on_bt_UP_RIGHT_pressed();
 
-    void on_bt_DOWN_LEFT_pressed();
+
 
     void on_bt_DOWN_pressed();
 
+    void on_bt_DOWN_LEFT_pressed();
+
     void on_bt_DOWN_RIGHT_pressed();
 
-    void on_pushButton_pressed();
-
-
-
-
-    void on_bt_UP_clicked();
 
 
     int  set_BT_Initialize(void);
+
+    void on_bt_STOP_pressed();
+
+    void on_bt_UP_pressed();
 
 private:
     Ui::GamePad *ui;

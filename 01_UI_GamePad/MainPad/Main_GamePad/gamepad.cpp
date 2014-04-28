@@ -34,6 +34,7 @@ GamePad::GamePad(QWidget *parent) :
 {
 
     ui->setupUi(this);
+    this->showFullScreen();
 
     ui->centralWidget->setStyleSheet("background-image:url(img_main.png)");
     bool iConnect = false;
@@ -51,9 +52,6 @@ GamePad::~GamePad()
 }
 //-----------------------------------------------------
 
-
-
-
 void GamePad::on_bt_UP_LEFT_pressed()
 {
 
@@ -64,9 +62,11 @@ void GamePad::on_bt_UP_LEFT_pressed()
 
     ui->lcdNumber->display(sigDataSend);
 }
+//-----------------------------------------------------
 
-void GamePad::on_bt_UP_clicked()
+void GamePad::on_bt_UP_pressed()
 {
+
     char sigDataSend    = (char)eUP;
 
     (void)write(fd, &sigDataSend, MSG_BIT);
@@ -74,13 +74,7 @@ void GamePad::on_bt_UP_clicked()
 
     ui->lcdNumber->display(sigDataSend);
 }
-
-/*
-void GamePad::on_bt_UP_pressed()
-{
-
-
-}*/
+//-----------------------------------------------------
 
 void GamePad::on_bt_UP_RIGHT_pressed()
 {
@@ -92,6 +86,7 @@ void GamePad::on_bt_UP_RIGHT_pressed()
 
     ui->lcdNumber->display(sigDataSend);
 }
+//-----------------------------------------------------
 
 void GamePad::on_bt_DOWN_LEFT_pressed()
 {
@@ -103,6 +98,7 @@ void GamePad::on_bt_DOWN_LEFT_pressed()
 
     ui->lcdNumber->display(sigDataSend);
 }
+//-----------------------------------------------------
 
 void GamePad::on_bt_DOWN_pressed()
 {
@@ -114,6 +110,7 @@ void GamePad::on_bt_DOWN_pressed()
 
     ui->lcdNumber->display(sigDataSend);
 }
+//-----------------------------------------------------
 
 void GamePad::on_bt_DOWN_RIGHT_pressed()
 {
@@ -125,8 +122,9 @@ void GamePad::on_bt_DOWN_RIGHT_pressed()
 
     ui->lcdNumber->display(sigDataSend);
 }
+//-----------------------------------------------------
 
-void GamePad::on_pushButton_pressed()
+void GamePad::on_bt_STOP_pressed()
 {
 
     char sigDataSend    = (char)eSTOP;
@@ -136,6 +134,7 @@ void GamePad::on_pushButton_pressed()
 
     ui->lcdNumber->display(sigDataSend);
 }
+//-----------------------------------------------------
 
 int GamePad::set_BT_Initialize(void)
 {
@@ -149,10 +148,8 @@ int GamePad::set_BT_Initialize(void)
     if( fd < 0 ) {
 
   //      QMessageBox::information( this,"ERROR", "open error");
-
         return -1;
     }
-    ui->lcdNumber->display(fd);
 
     fcntl(fd, F_SETFL);                     // Configure port reading
     tcgetattr(fd, &options);                // Get the current options for the port

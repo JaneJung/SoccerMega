@@ -120,7 +120,7 @@
       <string>PushButton</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="bt_STOP">
      <property name="geometry">
       <rect>
        <x>440</x>
