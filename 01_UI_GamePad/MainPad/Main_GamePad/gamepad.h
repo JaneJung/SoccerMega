@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QPushButton>
+#include <QIcon>
 
 namespace Ui {
 
@@ -18,23 +20,31 @@ public:
     ~GamePad();
 
 private slots:
-    void on_BT_Left_clicked();
 
-    void on_BT_UP_clicked();
 
-    void on_BT_Right_clicked();
 
-    void on_BT_Down_clicked();
 
-    void on_BT_Stop_clicked();
-    void on_BT_Left_pressed();
+  //  void on_bt_UP_pressed();
+
+    void on_bt_UP_LEFT_pressed();
+
+    void on_bt_UP_RIGHT_pressed();
+
+    void on_bt_DOWN_LEFT_pressed();
+
+    void on_bt_DOWN_pressed();
+
+    void on_bt_DOWN_RIGHT_pressed();
+
+    void on_pushButton_pressed();
+
+
+
+
+    void on_bt_UP_clicked();
 
 
     int  set_BT_Initialize(void);
-
-
-
-    void on_BT_Down_pressed();
 
 private:
     Ui::GamePad *ui;
@@ -47,7 +57,7 @@ public:
 
 enum DIRECTION {
 
-    eLEFT = 0x61, eRIGHT, eUP, eDOWN, eSTOP
+    eUPLEFT = 0x61, eUP, eUPRIGHT, eDOWNLEFT, eDOWN, eDOWNRIGHT, eSTOP
 };
 
 #endif // GAMEPAD_H

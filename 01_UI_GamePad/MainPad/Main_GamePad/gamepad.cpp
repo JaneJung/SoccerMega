@@ -35,6 +35,7 @@ GamePad::GamePad(QWidget *parent) :
 
     ui->setupUi(this);
 
+    ui->centralWidget->setStyleSheet("background-image:url(img_main.png)");
     bool iConnect = false;
     iConnect = set_BT_Initialize();
     if ( iConnect != true ) {
@@ -50,101 +51,91 @@ GamePad::~GamePad()
 }
 //-----------------------------------------------------
 
-void GamePad::on_BT_Left_clicked()
+
+
+
+void GamePad::on_bt_UP_LEFT_pressed()
 {
 
-  /*  char sigDataSend    = (char)eLEFT;
-    char sigDataRecv    = -1;
-
-    ui->lcdNumber->display(sigDataSend);
-
+    char sigDataSend    = (char)eUPLEFT;
 
     (void)write(fd, &sigDataSend, MSG_BIT);
-    fflush(stdin);*/
-
- /*   while( sigDataRecv != MSG_CARR ) {
-
-        (void)read(fd, &sigDataRecv, MSG_BIT);
-    }*/
-}
-//-----------------------------------------------------
-
-void GamePad::on_BT_Right_clicked()
-{
-
-    char sigDataSend    = (char)eRIGHT;
-    char sigDataRecv    = -1;
+    fflush(stdout);
 
     ui->lcdNumber->display(sigDataSend);
-
-
-    (void)write(fd, &sigDataSend, MSG_BIT);
-    fflush(stdin);
-
-/*    while( sigDataRecv != MSG_CARR ) {
-
-        (void)read(fd, &sigDataRecv, MSG_BIT);
-    }*/
-    ui->lcdNumber->display(sigDataSend);
 }
-//-----------------------------------------------------
 
-void GamePad::on_BT_UP_clicked()
+void GamePad::on_bt_UP_clicked()
 {
-
     char sigDataSend    = (char)eUP;
-    char sigDataRecv    = -1;
-
-    ui->lcdNumber->display(sigDataSend);
-
 
     (void)write(fd, &sigDataSend, MSG_BIT);
-    fflush(stdin);
+    fflush(stdout);
 
- /*   while( sigDataRecv != MSG_CARR ) {
-
-        (void)read(fd, &sigDataRecv, MSG_BIT);
-    }*/
+    ui->lcdNumber->display(sigDataSend);
 }
-//-----------------------------------------------------
 
-void GamePad::on_BT_Down_clicked()
+/*
+void GamePad::on_bt_UP_pressed()
 {
 
-/*    char sigDataSend    = (char)eDOWN;
-    char sigDataRecv    = -1;
 
-    ui->lcdNumber->display(sigDataSend);
+}*/
+
+void GamePad::on_bt_UP_RIGHT_pressed()
+{
+
+    char sigDataSend    = (char)eUPRIGHT;
 
     (void)write(fd, &sigDataSend, MSG_BIT);
-    fflush(stdin);*/
+    fflush(stdout);
 
-  /*  while( sigDataRecv != MSG_CARR ) {
-
-        (void)read(fd, &sigDataRecv, MSG_BIT);
-    }*/
-
+    ui->lcdNumber->display(sigDataSend);
 }
-//-----------------------------------------------------
 
-void GamePad::on_BT_Stop_clicked()
+void GamePad::on_bt_DOWN_LEFT_pressed()
+{
+
+    char sigDataSend    = (char)eDOWNLEFT;
+
+    (void)write(fd, &sigDataSend, MSG_BIT);
+    fflush(stdout);
+
+    ui->lcdNumber->display(sigDataSend);
+}
+
+void GamePad::on_bt_DOWN_pressed()
+{
+
+    char sigDataSend    = (char)eDOWN;
+
+    (void)write(fd, &sigDataSend, MSG_BIT);
+    fflush(stdout);
+
+    ui->lcdNumber->display(sigDataSend);
+}
+
+void GamePad::on_bt_DOWN_RIGHT_pressed()
+{
+
+    char sigDataSend    = (char)eDOWNRIGHT;
+
+    (void)write(fd, &sigDataSend, MSG_BIT);
+    fflush(stdout);
+
+    ui->lcdNumber->display(sigDataSend);
+}
+
+void GamePad::on_pushButton_pressed()
 {
 
     char sigDataSend    = (char)eSTOP;
-    char sigDataRecv    = -1;
-
-    ui->lcdNumber->display(sigDataSend);
-
 
     (void)write(fd, &sigDataSend, MSG_BIT);
-    fflush(stdin);
+    fflush(stdout);
 
-  /*  while( sigDataRecv != MSG_CARR ) {
-
-        (void)read(fd, &sigDataRecv, MSG_BIT);
-    }*/
+    ui->lcdNumber->display(sigDataSend);
 }
-//-----------------------------------------------------
 
 int GamePad::set_BT_Initialize(void)
 {
@@ -185,27 +176,3 @@ int GamePad::set_BT_Initialize(void)
 }
 //-----------------------------------------------------
 
-void GamePad::on_BT_Left_pressed()
-{
-
-    char sigDataSend    = (char)eLEFT;
-    char sigDataRecv    = -1;
-
-    ui->lcdNumber->display(sigDataSend);
-
-
-    (void)write(fd, &sigDataSend, MSG_BIT);
-    fflush(stdin);
-}
-
-void GamePad::on_BT_Down_pressed()
-{
-
-    char sigDataSend    = (char)eDOWN;
-    char sigDataRecv    = -1;
-
-    ui->lcdNumber->display(sigDataSend);
-
-    (void)write(fd, &sigDataSend, MSG_BIT);
-    fflush(stdin);
-}

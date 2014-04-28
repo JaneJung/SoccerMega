@@ -7,8 +7,18 @@ GamePad::GamePad(QWidget *parent) :
 {
     ui->setupUi(this);
 
-  //  mediaObject.setCurrentSource(Phonon::MediaSource("196461__paulw2k__football-crowd-goal.wav"));
-   // mediaObject.play();
+    ui->Right->setIcon(QIcon("R.PNG"));
+    ui->Right->setIconSize(QSize(120,130));
+
+
+    ui->Left->setIcon(QIcon("L.PNG"));
+    ui->Left->setIconSize(QSize(120,130));
+
+    ui->Up->setIcon(QIcon("U.PNG"));
+    ui->Up->setIconSize(QSize(120,130));
+
+    ui->Down->setIcon(QIcon("D.PNG"));
+    ui->Down->setIconSize(QSize(120,130));
 }
 
 GamePad::~GamePad()
