@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'gamepad.ui'
 **
-** Created: Mon Apr 28 14:41:59 2014
+** Created: Mon Apr 28 16:50:09 2014
 **      by: Qt User Interface Compiler version 4.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -18,10 +18,7 @@
 #include <QtGui/QHeaderView>
 #include <QtGui/QLCDNumber>
 #include <QtGui/QMainWindow>
-#include <QtGui/QMenuBar>
 #include <QtGui/QPushButton>
-#include <QtGui/QStatusBar>
-#include <QtGui/QToolBar>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -31,15 +28,14 @@ class Ui_GamePad
 public:
     QWidget *centralWidget;
     QGroupBox *GB_Control;
-    QPushButton *BT_UP;
-    QPushButton *BT_Left;
-    QPushButton *BT_Right;
-    QPushButton *BT_Down;
-    QPushButton *BT_Stop;
     QLCDNumber *lcdNumber;
-    QMenuBar *menuBar;
-    QToolBar *mainToolBar;
-    QStatusBar *statusBar;
+    QPushButton *bt_UP;
+    QPushButton *bt_UP_LEFT;
+    QPushButton *bt_UP_RIGHT;
+    QPushButton *bt_DOWN_LEFT;
+    QPushButton *bt_DOWN_RIGHT;
+    QPushButton *bt_DOWN;
+    QPushButton *pushButton;
 
     void setupUi(QMainWindow *GamePad)
     {
@@ -50,37 +46,33 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         GB_Control = new QGroupBox(centralWidget);
         GB_Control->setObjectName(QString::fromUtf8("GB_Control"));
-        GB_Control->setGeometry(QRect(10, 10, 761, 401));
+        GB_Control->setGeometry(QRect(10, 0, 780, 430));
         GB_Control->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
-        BT_UP = new QPushButton(GB_Control);
-        BT_UP->setObjectName(QString::fromUtf8("BT_UP"));
-        BT_UP->setGeometry(QRect(160, 0, 130, 130));
-        BT_Left = new QPushButton(GB_Control);
-        BT_Left->setObjectName(QString::fromUtf8("BT_Left"));
-        BT_Left->setGeometry(QRect(30, 130, 130, 130));
-        BT_Right = new QPushButton(GB_Control);
-        BT_Right->setObjectName(QString::fromUtf8("BT_Right"));
-        BT_Right->setGeometry(QRect(290, 130, 130, 130));
-        BT_Down = new QPushButton(GB_Control);
-        BT_Down->setObjectName(QString::fromUtf8("BT_Down"));
-        BT_Down->setGeometry(QRect(30, 250, 130, 130));
-        BT_Stop = new QPushButton(GB_Control);
-        BT_Stop->setObjectName(QString::fromUtf8("BT_Stop"));
-        BT_Stop->setGeometry(QRect(490, 240, 130, 130));
         lcdNumber = new QLCDNumber(GB_Control);
         lcdNumber->setObjectName(QString::fromUtf8("lcdNumber"));
-        lcdNumber->setGeometry(QRect(430, 30, 251, 91));
+        lcdNumber->setGeometry(QRect(510, 40, 251, 91));
+        bt_UP = new QPushButton(GB_Control);
+        bt_UP->setObjectName(QString::fromUtf8("bt_UP"));
+        bt_UP->setGeometry(QRect(150, 60, 130, 130));
+        bt_UP_LEFT = new QPushButton(GB_Control);
+        bt_UP_LEFT->setObjectName(QString::fromUtf8("bt_UP_LEFT"));
+        bt_UP_LEFT->setGeometry(QRect(10, 110, 130, 130));
+        bt_UP_RIGHT = new QPushButton(GB_Control);
+        bt_UP_RIGHT->setObjectName(QString::fromUtf8("bt_UP_RIGHT"));
+        bt_UP_RIGHT->setGeometry(QRect(290, 110, 130, 130));
+        bt_DOWN_LEFT = new QPushButton(GB_Control);
+        bt_DOWN_LEFT->setObjectName(QString::fromUtf8("bt_DOWN_LEFT"));
+        bt_DOWN_LEFT->setGeometry(QRect(10, 240, 130, 130));
+        bt_DOWN_RIGHT = new QPushButton(GB_Control);
+        bt_DOWN_RIGHT->setObjectName(QString::fromUtf8("bt_DOWN_RIGHT"));
+        bt_DOWN_RIGHT->setGeometry(QRect(290, 240, 130, 130));
+        bt_DOWN = new QPushButton(GB_Control);
+        bt_DOWN->setObjectName(QString::fromUtf8("bt_DOWN"));
+        bt_DOWN->setGeometry(QRect(150, 290, 130, 130));
+        pushButton = new QPushButton(GB_Control);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setGeometry(QRect(440, 290, 130, 130));
         GamePad->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(GamePad);
-        menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 800, 25));
-        GamePad->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(GamePad);
-        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
-        GamePad->addToolBar(Qt::TopToolBarArea, mainToolBar);
-        statusBar = new QStatusBar(GamePad);
-        statusBar->setObjectName(QString::fromUtf8("statusBar"));
-        GamePad->setStatusBar(statusBar);
 
         retranslateUi(GamePad);
 
@@ -90,12 +82,14 @@ public:
     void retranslateUi(QMainWindow *GamePad)
     {
         GamePad->setWindowTitle(QApplication::translate("GamePad", "GamePad", 0, QApplication::UnicodeUTF8));
-        GB_Control->setTitle(QApplication::translate("GamePad", "GroupBox", 0, QApplication::UnicodeUTF8));
-        BT_UP->setText(QApplication::translate("GamePad", "PushButton", 0, QApplication::UnicodeUTF8));
-        BT_Left->setText(QApplication::translate("GamePad", "PushButton", 0, QApplication::UnicodeUTF8));
-        BT_Right->setText(QApplication::translate("GamePad", "PushButton", 0, QApplication::UnicodeUTF8));
-        BT_Down->setText(QApplication::translate("GamePad", "PushButton", 0, QApplication::UnicodeUTF8));
-        BT_Stop->setText(QApplication::translate("GamePad", "PushButton", 0, QApplication::UnicodeUTF8));
+        GB_Control->setTitle(QString());
+        bt_UP->setText(QApplication::translate("GamePad", "PushButton", 0, QApplication::UnicodeUTF8));
+        bt_UP_LEFT->setText(QApplication::translate("GamePad", "PushButton", 0, QApplication::UnicodeUTF8));
+        bt_UP_RIGHT->setText(QApplication::translate("GamePad", "PushButton", 0, QApplication::UnicodeUTF8));
+        bt_DOWN_LEFT->setText(QApplication::translate("GamePad", "PushButton", 0, QApplication::UnicodeUTF8));
+        bt_DOWN_RIGHT->setText(QApplication::translate("GamePad", "PushButton", 0, QApplication::UnicodeUTF8));
+        bt_DOWN->setText(QApplication::translate("GamePad", "PushButton", 0, QApplication::UnicodeUTF8));
+        pushButton->setText(QApplication::translate("GamePad", "PushButton", 0, QApplication::UnicodeUTF8));
         Q_UNUSED(GamePad);
     } // retranslateUi
 

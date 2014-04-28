@@ -1,13 +1,13 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'gamepad.h'
 **
-** Created: Mon Apr 28 16:48:47 2014
+** Created: Mon Apr 28 11:27:35 2014
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "gamepad.h"
+#include "../GamePad/gamepad.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'gamepad.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 61
@@ -23,31 +23,22 @@ static const uint qt_meta_data_GamePad[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   12, // methods
+       4,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
 
  // slots: signature, parameters, type, tag, flags
        9,    8,    8,    8, 0x08,
-      33,    8,    8,    8, 0x08,
-      58,    8,    8,    8, 0x08,
-      84,    8,    8,    8, 0x08,
-     105,    8,    8,    8, 0x08,
-     132,    8,    8,    8, 0x08,
-     156,    8,    8,    8, 0x08,
-     179,    8,  175,    8, 0x08,
+      16,    8,    8,    8, 0x08,
+      21,    8,    8,    8, 0x08,
+      28,    8,    8,    8, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_GamePad[] = {
-    "GamePad\0\0on_bt_UP_LEFT_pressed()\0"
-    "on_bt_UP_RIGHT_pressed()\0"
-    "on_bt_DOWN_LEFT_pressed()\0"
-    "on_bt_DOWN_pressed()\0on_bt_DOWN_RIGHT_pressed()\0"
-    "on_pushButton_pressed()\0on_bt_UP_clicked()\0"
-    "int\0set_BT_Initialize()\0"
+    "GamePad\0\0Down()\0Up()\0Left()\0Right()\0"
 };
 
 const QMetaObject GamePad::staticMetaObject = {
@@ -75,18 +66,13 @@ int GamePad::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: on_bt_UP_LEFT_pressed(); break;
-        case 1: on_bt_UP_RIGHT_pressed(); break;
-        case 2: on_bt_DOWN_LEFT_pressed(); break;
-        case 3: on_bt_DOWN_pressed(); break;
-        case 4: on_bt_DOWN_RIGHT_pressed(); break;
-        case 5: on_pushButton_pressed(); break;
-        case 6: on_bt_UP_clicked(); break;
-        case 7: { int _r = set_BT_Initialize();
-            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
+        case 0: Down(); break;
+        case 1: Up(); break;
+        case 2: Left(); break;
+        case 3: Right(); break;
         default: ;
         }
-        _id -= 8;
+        _id -= 4;
     }
     return _id;
 }
