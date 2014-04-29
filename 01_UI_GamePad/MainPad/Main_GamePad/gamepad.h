@@ -42,7 +42,8 @@ private slots:
 
     void on_bt_UP_pressed();
 
-    void on_pushButton_pressed();
+
+    void on_bt_GOAL_clicked();
 
 private:
     Ui::GamePad *ui;

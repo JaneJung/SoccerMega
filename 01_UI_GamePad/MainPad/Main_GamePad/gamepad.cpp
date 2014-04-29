@@ -37,6 +37,8 @@ GamePad::GamePad(QWidget *parent) :
     this->showFullScreen();
 
 //    ui->centralWidget->setStyleSheet("background-image:url(img_main.png)");
+
+    ui->GB_Background->setStyleSheet("background-image:url(img_main.png)");
     bool iConnect = false;
     iConnect = set_BT_Initialize();
     if ( iConnect != true ) {
@@ -62,6 +64,18 @@ GamePad::GamePad(QWidget *parent) :
 
     ui->bt_DOWN->setIcon(QIcon("img_arrow_down.png"));
     ui->bt_DOWN->setIconSize(QSize(120,130));
+
+
+
+    ui->bt_STOP->setIcon(QIcon("img_stop.png"));
+    ui->bt_STOP->setIconSize(QSize(220,130));
+
+    ui->bt_GOAL->setIcon(QIcon("img_goal.png"));
+    ui->bt_GOAL->setIconSize(QSize(220,80));
+
+    ui->edit_PlayerInfo->setFontPointSize(25);
+    ui->edit_PlayerInfo->insertPlainText("Player 1");
+
 
 }
 //-----------------------------------------------------
@@ -156,51 +170,6 @@ void GamePad::on_bt_STOP_pressed()
 }
 //-----------------------------------------------------
 
-void GamePad::on_pushButton_pressed()
-{
-
-    char sigDataSend    = (char)eCEREMONY;
-
-    (void)write(fd, &sigDataSend, MSG_BIT);
-    fflush(stdout);
-
-    ui->lcdNumber->display(sigDataSend);
-
-
-    on_bt_UP_pressed();
-    usleep(200000);
-    on_bt_DOWN_pressed();
-    usleep(200000);
-    on_bt_UP_pressed();
-    usleep(200000);
-    on_bt_DOWN_pressed();
-    usleep(200000);
-    on_bt_UP_pressed();
-    usleep(200000);
-
-    on_bt_UP_RIGHT_pressed();
-    usleep(250000);
-    on_bt_UP_LEFT_pressed();
-    usleep(250000);
-    on_bt_UP_RIGHT_pressed();
-    usleep(250000);
-    on_bt_UP_LEFT_pressed();
-    usleep(250000);
-    on_bt_UP_RIGHT_pressed();
-    usleep(250000);
-
-    on_bt_DOWN_RIGHT_pressed();
-    usleep(250000);
-    on_bt_DOWN_LEFT_pressed();
-    usleep(250000);
-    on_bt_DOWN_RIGHT_pressed();
-    usleep(250000);
-    on_bt_DOWN_LEFT_pressed();
-    usleep(250000);
-
-
-    on_bt_STOP_pressed();
-}
 
 int GamePad::set_BT_Initialize(void)
 {
@@ -240,3 +209,48 @@ int GamePad::set_BT_Initialize(void)
 //-----------------------------------------------------
 
 
+
+void GamePad::on_bt_GOAL_clicked()
+{
+
+    char sigDataSend    = (char)eCEREMONY;
+
+    (void)write(fd, &sigDataSend, MSG_BIT);
+    fflush(stdout);
+
+    ui->lcdNumber->display(sigDataSend);
+
+    on_bt_UP_pressed();
+    usleep(200000);
+    on_bt_DOWN_pressed();
+    usleep(200000);
+    on_bt_UP_pressed();
+    usleep(200000);
+    on_bt_DOWN_pressed();
+    usleep(200000);
+    on_bt_UP_pressed();
+    usleep(200000);
+
+    on_bt_UP_RIGHT_pressed();
+    usleep(250000);
+    on_bt_UP_LEFT_pressed();
+    usleep(250000);
+    on_bt_UP_RIGHT_pressed();
+    usleep(250000);
+    on_bt_UP_LEFT_pressed();
+    usleep(250000);
+    on_bt_UP_RIGHT_pressed();
+    usleep(250000);
+
+    on_bt_DOWN_RIGHT_pressed();
+    usleep(250000);
+    on_bt_DOWN_LEFT_pressed();
+    usleep(250000);
+    on_bt_DOWN_RIGHT_pressed();
+    usleep(250000);
+    on_bt_DOWN_LEFT_pressed();
+    usleep(250000);
+
+
+    on_bt_STOP_pressed();
+}

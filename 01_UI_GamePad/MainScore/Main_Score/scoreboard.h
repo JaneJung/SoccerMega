@@ -3,21 +3,17 @@
 
 #include <QMainWindow>
 #include <QLCDNumber>
-#include <QMessageBox>
 
 #include <QIcon>
 
 #include <QLabel>
 #include <QTimer>
 #include <QTime>
+#include <QProcess> //audio
+#include <QDebug>  //audio
 
-#include <QImage>              //QImage를 사용하기 위한 라이브러리
-
-#include <QPixmap>             //QPixmap를 사용하기 위한 라이브러리
-
-
-
-
+#include <QThread>
+#include "worker.h"
 
 
 namespace Ui {
@@ -38,8 +34,19 @@ public:
     QTime time;
     unsigned int addMsec;
 
+    /*audio*/
+    QString program;
+    QStringList arguments;
+    QProcess *myProcess;
+    int audioFlag;
+    QStringList AudioPlayList;
+    int AudioPlayListPointer;
+
 private:
     Ui::scoreboard *ui;
+    QThread *thread;
+    Worker *worker;
+    static scoreboard * pInstance;
 
 private slots:
 
@@ -47,20 +54,32 @@ private slots:
     void on_bt_Start_clicked();
     void on_bt_Reset_clicked();
 
-    void on_bt_Score_Left_pressed();
-    void on_bt_Score_Right_pressed();
-
 public slots:
     void clockTimer();
     void clockStart();
     void clockStop();
     void clockReset();
+    void on_bt_Score_Left_pressed();
+    void on_bt_Score_Right_pressed();
+
 
 public:
     int _score_Left;
     int _score_Right;
-    QImage *Img;
-    QPixmap *buffer;
+    /*audio*/
+    void AudioInit(void);
+    void PlayAudio(void);
+    void StopAudio(void);
+    void PlayAudio(int m);
+    void PlayAudioToggle(int m);
+
+    static scoreboard* getInstancePtr()
+     {
+      if(pInstance == NULL)
+          pInstance = new scoreboard;
+       return pInstance;
+     };
+
 
 };
 

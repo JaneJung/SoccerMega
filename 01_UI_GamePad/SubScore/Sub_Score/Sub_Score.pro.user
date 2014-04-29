@@ -10,11 +10,11 @@
  </data>
  <data>
   <variable>RunConfiguration0-ProFile</variable>
-  <value type="QString">GamePad.pro</value>
+  <value type="QString">Sub_Score.pro</value>
  </data>
  <data>
   <variable>RunConfiguration0-RunConfiguration.name</variable>
-  <value type="QString">GamePad</value>
+  <value type="QString">Sub_Score</value>
  </data>
  <data>
   <variable>RunConfiguration0-UseDyldImageSuffix</variable>
@@ -57,7 +57,6 @@
   <valuemap type="QVariantMap">
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
    <value key="QtVersionId" type="int">4</value>
-   <value key="ToolChain" type="int">0</value>
    <value key="buildConfiguration" type="int">0</value>
   </valuemap>
  </data>
@@ -77,10 +76,6 @@
   <variable>buildconfiguration-Release-cleanstep0</variable>
   <valuemap type="QVariantMap">
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
-   <value key="cleanConfig" type="bool">true</value>
-   <valuelist key="makeargs" type="QVariantList">
-    <value type="QString">clean</value>
-   </valuelist>
   </valuemap>
  </data>
  <data>
