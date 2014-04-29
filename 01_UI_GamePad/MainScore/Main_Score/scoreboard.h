@@ -3,12 +3,19 @@
 
 #include <QMainWindow>
 #include <QLCDNumber>
+#include <QMessageBox>
 
 #include <QIcon>
 
 #include <QLabel>
 #include <QTimer>
 #include <QTime>
+
+#include <QImage>              //QImage를 사용하기 위한 라이브러리
+
+#include <QPixmap>             //QPixmap를 사용하기 위한 라이브러리
+
+
 
 
 
@@ -52,6 +59,8 @@ public slots:
 public:
     int _score_Left;
     int _score_Right;
+    QImage *Img;
+    QPixmap *buffer;
 
 };
 

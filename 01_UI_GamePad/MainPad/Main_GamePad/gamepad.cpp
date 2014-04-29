@@ -36,13 +36,33 @@ GamePad::GamePad(QWidget *parent) :
     ui->setupUi(this);
     this->showFullScreen();
 
-    ui->centralWidget->setStyleSheet("background-image:url(img_main.png)");
+//    ui->centralWidget->setStyleSheet("background-image:url(img_main.png)");
     bool iConnect = false;
     iConnect = set_BT_Initialize();
     if ( iConnect != true ) {
 
 //        QMessageBox(this, "ERROR", "Open Device File");
     }
+
+    ui->bt_UP->setIcon(QIcon("img_arrow_up.png"));
+    ui->bt_UP->setIconSize(QSize(120,130));
+
+    ui->bt_UP_LEFT->setIcon(QIcon("img_arrow_upleft.png"));
+    ui->bt_UP_LEFT->setIconSize(QSize(120,130));
+
+    ui->bt_UP_RIGHT->setIcon(QIcon("img_arrow_upright.png"));
+    ui->bt_UP_RIGHT->setIconSize(QSize(120,130));
+
+    ui->bt_DOWN_LEFT->setIcon(QIcon("img_arrow_downleft.png"));
+    ui->bt_DOWN_LEFT->setIconSize(QSize(120,130));
+
+    ui->bt_DOWN_RIGHT->setIcon(QIcon("img_arrow_downright.png"));
+    ui->bt_DOWN_RIGHT->setIconSize(QSize(120,130));
+
+
+    ui->bt_DOWN->setIcon(QIcon("img_arrow_down.png"));
+    ui->bt_DOWN->setIconSize(QSize(120,130));
+
 }
 //-----------------------------------------------------
 
@@ -136,6 +156,52 @@ void GamePad::on_bt_STOP_pressed()
 }
 //-----------------------------------------------------
 
+void GamePad::on_pushButton_pressed()
+{
+
+    char sigDataSend    = (char)eCEREMONY;
+
+    (void)write(fd, &sigDataSend, MSG_BIT);
+    fflush(stdout);
+
+    ui->lcdNumber->display(sigDataSend);
+
+
+    on_bt_UP_pressed();
+    usleep(200000);
+    on_bt_DOWN_pressed();
+    usleep(200000);
+    on_bt_UP_pressed();
+    usleep(200000);
+    on_bt_DOWN_pressed();
+    usleep(200000);
+    on_bt_UP_pressed();
+    usleep(200000);
+
+    on_bt_UP_RIGHT_pressed();
+    usleep(250000);
+    on_bt_UP_LEFT_pressed();
+    usleep(250000);
+    on_bt_UP_RIGHT_pressed();
+    usleep(250000);
+    on_bt_UP_LEFT_pressed();
+    usleep(250000);
+    on_bt_UP_RIGHT_pressed();
+    usleep(250000);
+
+    on_bt_DOWN_RIGHT_pressed();
+    usleep(250000);
+    on_bt_DOWN_LEFT_pressed();
+    usleep(250000);
+    on_bt_DOWN_RIGHT_pressed();
+    usleep(250000);
+    on_bt_DOWN_LEFT_pressed();
+    usleep(250000);
+
+
+    on_bt_STOP_pressed();
+}
+
 int GamePad::set_BT_Initialize(void)
 {
 
@@ -172,4 +238,5 @@ int GamePad::set_BT_Initialize(void)
     return 0;
 }
 //-----------------------------------------------------
+
 

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'scoreboard.ui'
 **
-** Created: Mon Apr 28 23:16:08 2014
+** Created: Tue Apr 29 08:31:51 2014
 **      by: Qt User Interface Compiler version 4.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -17,6 +17,7 @@
 #include <QtGui/QGroupBox>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLCDNumber>
+#include <QtGui/QLabel>
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenuBar>
 #include <QtGui/QPushButton>
@@ -37,8 +38,10 @@ public:
     QLCDNumber *lcdNumber_mSec;
     QLCDNumber *lcdNumber_Sec;
     QLCDNumber *lcdNumber_Min;
-    QPushButton *bt_Score_Left;
     QPushButton *bt_Score_Right;
+    QPushButton *bt_Score_Left;
+    QLabel *label;
+    QLabel *label_2;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -53,6 +56,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(scoreboard->sizePolicy().hasHeightForWidth());
         scoreboard->setSizePolicy(sizePolicy);
+        scoreboard->setCursor(QCursor(Qt::SplitVCursor));
         scoreboard->setAutoFillBackground(false);
         centralWidget = new QWidget(scoreboard);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
@@ -101,12 +105,20 @@ public:
         lcdNumber_Min->setFrameShape(QFrame::NoFrame);
         lcdNumber_Min->setSmallDecimalPoint(false);
         lcdNumber_Min->setSegmentStyle(QLCDNumber::Filled);
-        bt_Score_Left = new QPushButton(centralWidget);
-        bt_Score_Left->setObjectName(QString::fromUtf8("bt_Score_Left"));
-        bt_Score_Left->setGeometry(QRect(70, 100, 222, 300));
         bt_Score_Right = new QPushButton(centralWidget);
         bt_Score_Right->setObjectName(QString::fromUtf8("bt_Score_Right"));
         bt_Score_Right->setGeometry(QRect(450, 90, 222, 300));
+        bt_Score_Left = new QPushButton(centralWidget);
+        bt_Score_Left->setObjectName(QString::fromUtf8("bt_Score_Left"));
+        bt_Score_Left->setGeometry(QRect(120, 100, 222, 300));
+        label = new QLabel(centralWidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(20, 350, 351, 401));
+        label->setPixmap(QPixmap(QString::fromUtf8(":/hi/hi.png")));
+        label_2 = new QLabel(centralWidget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setGeometry(QRect(390, 370, 371, 311));
+        label_2->setPixmap(QPixmap(QString::fromUtf8(":/hi/img_num_1.jpg")));
         scoreboard->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(scoreboard);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -131,8 +143,10 @@ public:
         bt_Reset->setText(QApplication::translate("scoreboard", "reset", 0, QApplication::UnicodeUTF8));
         bt_Stop->setText(QApplication::translate("scoreboard", "stop", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("scoreboard", "GroupBox", 0, QApplication::UnicodeUTF8));
-        bt_Score_Left->setText(QString());
         bt_Score_Right->setText(QString());
+        bt_Score_Left->setText(QString());
+        label->setText(QString());
+        label_2->setText(QString());
         Q_UNUSED(scoreboard);
     } // retranslateUi
 

@@ -21,7 +21,6 @@ public:
 
 private slots:
 
-    void on_bt_UP_clicked();
 
     void on_bt_UP_LEFT_pressed();
 
@@ -43,6 +42,8 @@ private slots:
 
     void on_bt_UP_pressed();
 
+    void on_pushButton_pressed();
+
 private:
     Ui::GamePad *ui;
 
@@ -54,7 +55,7 @@ public:
 
 enum DIRECTION {
 
-    eUPLEFT = 0x61, eUP, eUPRIGHT, eDOWNLEFT, eDOWN, eDOWNRIGHT, eSTOP
+    eUPLEFT = 0x61, eUP, eUPRIGHT, eDOWNLEFT, eDOWN, eDOWNRIGHT, eSTOP, eCEREMONY
 };
 
 #endif // GAMEPAD_H

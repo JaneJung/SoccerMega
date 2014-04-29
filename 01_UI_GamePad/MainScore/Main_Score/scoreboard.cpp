@@ -3,6 +3,9 @@
 #include <string>
 #include <stdio.h>
 
+#include <QFile>
+#include <QDebug>
+
 #define PLAY_TIME   3
 
 #define BT_IMG_WIDTH    222
@@ -29,6 +32,45 @@ scoreboard::scoreboard(QWidget *parent) :
     _score_Right    = 0;
     on_bt_Score_Left_pressed();
     on_bt_Score_Right_pressed();
+
+    Img = new QImage();       //이미지를 로드하기 위한 QImage 선언
+    QPixmap *buffer = new QPixmap();  //버퍼로 사용할 QPixmap 선언
+
+
+/*    if(Img->load("/mnt/nfsdir/img_0.png"))      //이미지를 로드한다.
+
+{
+
+        *buffer = QPixmap::fromImage(*Img);   //이미지를 버퍼에 옮긴다.
+
+        *buffer = buffer->scaled(Img->width(),Img->height()); //이미지 사이즈 조절
+
+    }
+
+    else // 이미지 로드 실패
+
+{
+
+        QMessageBox::about(0, QString::fromAscii("Image load Error"),QString::fromAscii    ("Image load Error"));
+
+    }*/
+
+
+
+
+    QLabel *lbView = new QLabel(this); //이미지를 화면에 출력할 QLabel 선언
+
+    //lbView->setPixmap(*buffer);       //버퍼에 있는 이미지를 QLabel에 출력
+    lbView->setPixmap(QPixmap("img_0.png"));       //버퍼에 있는 이미지를 QLabel에 출력
+
+    lbView->resize(buffer->width(),buffer->height()); //QLabel의 크기를 이미지 사이즈에 맞추어 조절한다.
+
+
+    lbView->move(0,0);                //QLabel위치 조정
+
+    lbView->show();                   //QLabel 를 보여준다.
+
+
 }
 //-----------------------------------------------------
 
@@ -97,6 +139,9 @@ void scoreboard::clockReset()
 
         addMsec = 0;
         setLabels();
+        ui->lcdNumber_Min->display(  0 );
+        ui->lcdNumber_Sec->display(  0 );
+        ui->lcdNumber_mSec->display( 0 );
     }
 }
 //-----------------------------------------------------
@@ -173,6 +218,9 @@ void scoreboard::on_bt_Score_Left_pressed()
 void scoreboard::on_bt_Score_Right_pressed()
 {
 
+
+    QFile testing("img_num_0.jpg");
+    qDebug() << testing.exists();
     switch(_score_Right) {
         case 0:
                 ui->bt_Score_Right->setIcon(QIcon("img_num_0.jpg"));
