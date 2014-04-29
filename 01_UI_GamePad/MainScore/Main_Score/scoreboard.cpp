@@ -3,14 +3,24 @@
 #include <string>
 #include <stdio.h>
 
-#include <QFile>
-#include <QDebug>
+#include <QPixmap>
+#include <QLabel>
 
 #define PLAY_TIME   3
 
 #define BT_IMG_WIDTH    222
 #define BT_IMG_HEIGHT   300
 
+#define MUSIC_FOLDER "./music/"
+
+enum effct{    //audio
+    StartGame,
+    Stadium,
+    EndGame,
+    Stop
+};
+
+ scoreboard * scoreboard::pInstance = NULL;
 
 scoreboard::scoreboard(QWidget *parent) :
     QMainWindow(parent),
@@ -32,51 +42,19 @@ scoreboard::scoreboard(QWidget *parent) :
     _score_Right    = 0;
     on_bt_Score_Left_pressed();
     on_bt_Score_Right_pressed();
+    AudioInit();
+    PlayAudioToggle(StartGame);
 
-    Img = new QImage();       //이미지를 로드하기 위한 QImage 선언
-    QPixmap *buffer = new QPixmap();  //버퍼로 사용할 QPixmap 선언
-
-
-/*    if(Img->load("/mnt/nfsdir/img_0.png"))      //이미지를 로드한다.
-
-{
-
-        *buffer = QPixmap::fromImage(*Img);   //이미지를 버퍼에 옮긴다.
-
-        *buffer = buffer->scaled(Img->width(),Img->height()); //이미지 사이즈 조절
-
-    }
-
-    else // 이미지 로드 실패
-
-{
-
-        QMessageBox::about(0, QString::fromAscii("Image load Error"),QString::fromAscii    ("Image load Error"));
-
-    }*/
-
-
-
-
-    QLabel *lbView = new QLabel(this); //이미지를 화면에 출력할 QLabel 선언
-
-    //lbView->setPixmap(*buffer);       //버퍼에 있는 이미지를 QLabel에 출력
-    lbView->setPixmap(QPixmap("img_0.png"));       //버퍼에 있는 이미지를 QLabel에 출력
-
-    lbView->resize(buffer->width(),buffer->height()); //QLabel의 크기를 이미지 사이즈에 맞추어 조절한다.
-
-
-    lbView->move(0,0);                //QLabel위치 조정
-
-    lbView->show();                   //QLabel 를 보여준다.
-
-
+    //thread
+    //thread = new QThread();
+    worker = new Worker();
 }
 //-----------------------------------------------------
 
 scoreboard::~scoreboard()
 {
     delete ui;
+    delete worker;
 }
 //-----------------------------------------------------
 
@@ -118,18 +96,19 @@ void scoreboard::clockTimer()
 void scoreboard::clockStart(void)
 {
     if( !(timer->isActive()) ) {
-
         timer->start(1);
     }
+    PlayAudioToggle(Stadium);
 }
 //-----------------------------------------------------
 
 void scoreboard::clockStop()
 {
     if( timer->isActive() ) {
-
         timer->stop();
+
     }
+    PlayAudioToggle(EndGame);
 }
 //-----------------------------------------------------
 
@@ -166,49 +145,58 @@ void scoreboard::on_bt_Reset_clicked()
 
 void scoreboard::on_bt_Score_Left_pressed()
 {
+    //QString program2;
+    //sprintf(program2, "img_num_%d.jpg", _score_Left);
+    //ui->bt_Score_Left->setIcon(QIcon(program2));
+    //ui->bt_Score_Left->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
+
+    qDebug() << " left score";
 
     switch(_score_Left) {
         case 0:
-                ui->bt_Score_Left->setIcon(QIcon("img_num_0.jpg"));
+                //QPixmap pix(":/img_num_1.jpg");
+                //ui->label-setPixmap(&pix);
+                ui->bt_Score_Left->setIcon(QIcon("/mnt/nfsdir/img_num_0.jpg"));
                 ui->bt_Score_Left->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 1:
-                ui->bt_Score_Left->setIcon(QIcon("img_num_1.jpg"));
+                ui->bt_Score_Left->setIcon(QIcon("/mnt/nfsdir/img_num_1.jpg"));
                 ui->bt_Score_Left->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 2:
-                ui->bt_Score_Left->setIcon(QIcon("img_num_2.jpg"));
+                ui->bt_Score_Left->setIcon(QIcon("/mnt/nfsdir/img_num_2.jpg"));
                 ui->bt_Score_Left->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 3:
-                ui->bt_Score_Left->setIcon(QIcon("img_num_3.jpg"));
+                ui->bt_Score_Left->setIcon(QIcon("/mnt/nfsdir/img_num_3.jpg"));
                 ui->bt_Score_Left->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 4:
-                ui->bt_Score_Left->setIcon(QIcon("img_num_4.jpg"));
+                ui->bt_Score_Left->setIcon(QIcon("/mnt/nfsdir/img_num_4.jpg"));
                 ui->bt_Score_Left->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 5:
-                ui->bt_Score_Left->setIcon(QIcon("img_num_5.jpg"));
+                ui->bt_Score_Left->setIcon(QIcon("/mnt/nfsdir/img_num_5.jpg"));
                 ui->bt_Score_Left->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 6:
-                ui->bt_Score_Left->setIcon(QIcon("img_num_6.jpg"));
+                ui->bt_Score_Left->setIcon(QIcon("/mnt/nfsdir/img_num_6.jpg"));
                 ui->bt_Score_Left->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 7:
-                ui->bt_Score_Left->setIcon(QIcon("img_num_7.jpg"));
+                ui->bt_Score_Left->setIcon(QIcon("/mnt/nfsdir/img_num_7.jpg"));
                 ui->bt_Score_Left->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 8:
-                ui->bt_Score_Left->setIcon(QIcon("img_num_8.jpg"));
+                ui->bt_Score_Left->setIcon(QIcon("/mnt/nfsdir/img_num_8.jpg"));
                 ui->bt_Score_Left->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 9:
-                ui->bt_Score_Left->setIcon(QIcon("img_num_9.jpg"));
+                ui->bt_Score_Left->setIcon(QIcon("/mnt/nfsdir/img_num_9.jpg"));
                 ui->bt_Score_Left->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
     }
+
     _score_Left++;
     if ( _score_Left == 10 )
         _score_Left = 0;
@@ -217,54 +205,105 @@ void scoreboard::on_bt_Score_Left_pressed()
 
 void scoreboard::on_bt_Score_Right_pressed()
 {
+    QString program1 = "/mnt/nfsdir/img_num_0.jpg";
 
-
-    QFile testing("img_num_0.jpg");
-    qDebug() << testing.exists();
+     qDebug() << " rightt score";
     switch(_score_Right) {
         case 0:
-                ui->bt_Score_Right->setIcon(QIcon("img_num_0.jpg"));
+                ui->bt_Score_Right->setIcon(QIcon(program1));
                 ui->bt_Score_Right->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 1:
-                ui->bt_Score_Right->setIcon(QIcon("img_num_1.jpg"));
+                ui->bt_Score_Right->setIcon(QIcon("/mnt/nfsdir/img_num_1.jpg"));
                 ui->bt_Score_Right->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 2:
-                ui->bt_Score_Right->setIcon(QIcon("img_num_2.jpg"));
+                ui->bt_Score_Right->setIcon(QIcon("/mnt/nfsdir/img_num_2.jpg"));
                 ui->bt_Score_Right->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 3:
-                ui->bt_Score_Right->setIcon(QIcon("img_num_3.jpg"));
+                ui->bt_Score_Right->setIcon(QIcon("/mnt/nfsdir/img_num_3.jpg"));
                 ui->bt_Score_Right->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 4:
-                ui->bt_Score_Right->setIcon(QIcon("img_num_4.jpg"));
+                ui->bt_Score_Right->setIcon(QIcon("/mnt/nfsdir/img_num_4.jpg"));
                 ui->bt_Score_Right->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 5:
-                ui->bt_Score_Right->setIcon(QIcon("img_num_5.jpg"));
+                ui->bt_Score_Right->setIcon(QIcon("/mnt/nfsdir/img_num_5.jpg"));
                 ui->bt_Score_Right->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 6:
-                ui->bt_Score_Right->setIcon(QIcon("img_num_6.jpg"));
+                ui->bt_Score_Right->setIcon(QIcon("/mnt/nfsdir/img_num_6.jpg"));
                 ui->bt_Score_Right->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 7:
-                ui->bt_Score_Right->setIcon(QIcon("img_num_7.jpg"));
+                ui->bt_Score_Right->setIcon(QIcon("/mnt/nfsdir/img_num_7.jpg"));
                 ui->bt_Score_Right->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 8:
-                ui->bt_Score_Right->setIcon(QIcon("img_num_8.jpg"));
+                ui->bt_Score_Right->setIcon(QIcon("/mnt/nfsdir/img_num_8.jpg"));
                 ui->bt_Score_Right->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
         case 9:
-                ui->bt_Score_Right->setIcon(QIcon("img_num_9.jpg"));
+                ui->bt_Score_Right->setIcon(QIcon("/mnt/nfsdir/img_num_9.jpg"));
                 ui->bt_Score_Right->setIconSize(QSize(BT_IMG_WIDTH,BT_IMG_HEIGHT));
                 break;
     }
     _score_Right++;
     if ( _score_Right == 10 )
         _score_Right = 0;
+}
+//-----------------------------------------------------
+void scoreboard::AudioInit()
+{
+    program = "./madplay";
+
+    audioFlag = 1;
+    AudioPlayList << "start_music3.mp3" <<"stadium.mp3" << "goal2.mp3" << "gaol.mp3" << "start_music3.mp3";
+    AudioPlayListPointer = 0;
+    myProcess= new QProcess(this);
+}
+//-----------------------------------------------------
+void scoreboard::PlayAudioToggle(int m)
+{
+    if(audioFlag == 1)
+    {
+        audioFlag = 0;
+        PlayAudio(m);
+    }
+    else
+    {
+        audioFlag = 1;
+        StopAudio();
+    }
+}
+//-----------------------------------------------------
+void scoreboard::PlayAudio(int m)
+{
+     this->AudioPlayListPointer  = m;
+    arguments.clear();
+
+    if(m == StartGame)
+    {
+        arguments << MUSIC_FOLDER + AudioPlayList.at(AudioPlayListPointer);
+    }
+    else if(m == Stadium)
+    {
+        arguments << MUSIC_FOLDER + AudioPlayList.at(AudioPlayListPointer) << "-r";
+    }
+    else if(m == EndGame)
+    {
+         arguments << "-s" << "00:00:04"<< "-t" << "00:00:03"<< MUSIC_FOLDER + AudioPlayList.at(AudioPlayListPointer);
+    }
+
+    myProcess->start(program, arguments);
+}
+
+//-----------------------------------------------------
+void scoreboard::StopAudio()
+{
+    arguments.clear();
+    myProcess->kill();
 }
 //-----------------------------------------------------
