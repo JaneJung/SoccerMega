@@ -6,9 +6,9 @@
 #define MAXLINE     8192
 
 
-#define Board26
+//#define Board26
 #define SubScore26   0x51
-//#define Board03
+#define Board03
 #define SubScore03   0x41
 //#define SubScore3    0x41
 

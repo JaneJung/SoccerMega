@@ -72,13 +72,15 @@ void Worker::onReadyRead() {
     qDebug() << "read function";
     buffer.append(socket->readAll());
     if (buffer.count() == 3) {
-        scoreboard sb;
         if (buffer.at(2) == 'a') {
             qDebug() << "A Board";
             //connect(this, SIGNAL(updateScore()),&sb, SLOT(on_bt_Score_Left_pressed()));
             //emit updateScore();
             scoreboard::getInstancePtr()->on_bt_Score_Left_pressed();
-            sleep(5);
+            scoreboard::getInstancePtr()->StopAudio();
+            scoreboard::getInstancePtr()->PlayAudio(3);
+
+            //sleep(5);
             qDebug() << "A updateScore";
         } else if (buffer.at(2) == 'b'){
 
@@ -86,7 +88,9 @@ void Worker::onReadyRead() {
             //connect(this, SIGNAL(updateScore()),&sb, SLOT(on_bt_Score_Right_pressed()));
             //emit updateScore();
             scoreboard::getInstancePtr()->on_bt_Score_Right_pressed();
-            sleep(5);
+            scoreboard::getInstancePtr()->StopAudio();
+            scoreboard::getInstancePtr()->PlayAudio(3);
+            //sleep(5);
             qDebug() << "B updateScore";
             //scoreboard::on_bt_Score_Right_pressed();
         }

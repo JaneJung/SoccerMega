@@ -50,9 +50,10 @@ private:
 
 private slots:
 
-    void on_bt_Stop_clicked();
-    void on_bt_Start_clicked();
-    void on_bt_Reset_clicked();
+    void on_bt_StartGame_clicked();
+
+
+    void on_bt_Mute_clicked();
 
 public slots:
     void clockTimer();
@@ -66,12 +67,19 @@ public slots:
 public:
     int _score_Left;
     int _score_Right;
+    int _game_Time;
+
+    bool bTimer;
+
+    void set_label_Time(int game_Time);
+
     /*audio*/
     void AudioInit(void);
     void PlayAudio(void);
     void StopAudio(void);
     void PlayAudio(int m);
     void PlayAudioToggle(int m);
+
 
     static scoreboard* getInstancePtr()
      {
