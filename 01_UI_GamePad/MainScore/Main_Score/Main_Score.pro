@@ -11,5 +11,3 @@ INCLUDEPATH += .
 HEADERS += scoreboard.h
 FORMS += scoreboard.ui
 SOURCES += main.cpp scoreboard.cpp
-RESOURCES += ImgFile.qrc \
-    hi.qrc
